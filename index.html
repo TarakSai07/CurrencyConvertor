@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Currency Converter</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+
+  <style>
+    body {
+      background: #f8fafc;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    /* Navbar */
+    .navbar {
+      background: #ffffff;
+    }
+    .navbar .nav-link {
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    .navbar .nav-link:hover {
+      color: #0d6efd;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(to right, #0d6efd, #6610f2);
+      color: white;
+      padding: 90px 20px;
+      text-align: center;
+    }
+    .hero h1 {
+      font-weight: 700;
+      font-size: 2.8rem;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      margin-top: 10px;
+    }
+
+    /* Converter */
+    .converter-container {
+      max-width: 550px;
+      margin: -50px auto 60px;
+      background: #fff;
+      padding: 35px;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      position: relative;
+      z-index: 10;
+    }
+    .btn-convert {
+      font-weight: 600;
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      background: linear-gradient(45deg, #0d6efd, #6610f2);
+      border: none;
+      transition: transform 0.2s ease-in-out, box-shadow 0.2s;
+    }
+    .btn-convert:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    #result {
+      margin-top: 20px;
+      font-size: 1.3rem;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    /* Sections */
+    .currency-section {
+      padding: 60px 15px;
+    }
+    .currency-section:nth-child(even) {
+      background: #f1f5f9;
+    }
+    .currency-section h2 {
+      color: #0d6efd;
+      font-size: 2rem;
+      margin-bottom: 15px;
+    }
+
+    /* Footer */
+    footer {
+      background: #0d6efd;
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+    }
+    footer a {
+      color: white;
+      text-decoration: none;
+      margin: 0 8px;
+      transition: opacity 0.2s;
+    }
+    footer a:hover {
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+  <div class="container">
+    <a class="navbar-brand fw-bold text-primary" href="#"><i class="fa-solid fa-coins"></i> Currency App</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="#USD">USD</a></li>
+        <li class="nav-item"><a class="nav-link" href="#EUR">EUR</a></li>
+        <li class="nav-item"><a class="nav-link" href="#GBP">GBP</a></li>
+        <li class="nav-item"><a class="nav-link" href="#INR">INR</a></li>
+        <li class="nav-item"><a class="nav-link" href="#JPY">JPY</a></li>
+        <li class="nav-item"><a class="nav-link" href="#AUD">AUD</a></li>
+        <li class="nav-item"><a class="nav-link" href="#CAD">CAD</a></li>
+        <li class="nav-item"><a class="nav-link" href="#CHF">CHF</a></li>
+        <li class="nav-item"><a class="nav-link" href="#CNY">CNY</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+    <h1>Global Currency Converter</h1>
+    <p>Convert between the world’s major currencies instantly and learn about each one.</p>
+  </div>
+</section>
+
+<!-- Converter -->
+<div class="converter-container">
+  <h2 class="text-center mb-3 text-primary">Currency Converter</h2>
+  <div class="mb-3">
+    <label for="amount" class="form-label">Amount</label>
+    <input type="number" class="form-control" id="amount" placeholder="Enter amount" min="0" step="any" />
+  </div>
+  <div class="row g-3 mb-3">
+    <div class="col-6">
+      <label for="fromCurrency" class="form-label">From</label>
+      <select id="fromCurrency" class="form-select"></select>
+    </div>
+    <div class="col-6">
+      <label for="toCurrency" class="form-label">To</label>
+      <select id="toCurrency" class="form-select"></select>
+    </div>
+  </div>
+  <button id="convertBtn" class="btn btn-convert text-white">Convert</button>
+  <div id="result"></div>
+</div>
+
+<!-- Currency Sections -->
+<section id="USD" class="currency-section"><div class="container"><h2>USD - United States Dollar</h2><p>The US Dollar (USD) is the most traded currency globally and a primary reserve asset.</p></div></section>
+<section id="EUR" class="currency-section"><div class="container"><h2>EUR - Euro</h2><p>The Euro (EUR) is the official currency of the Eurozone and ranks second in trade.</p></div></section>
+<section id="GBP" class="currency-section"><div class="container"><h2>GBP - British Pound</h2><p>The British Pound (GBP) is the world’s oldest currency still in circulation.</p></div></section>
+<section id="INR" class="currency-section"><div class="container"><h2>INR - Indian Rupee</h2><p>The Indian Rupee (INR) is a vital currency for South Asia’s growing economy.</p></div></section>
+<section id="JPY" class="currency-section"><div class="container"><h2>JPY - Japanese Yen</h2><p>The Japanese Yen (JPY) is Asia’s most traded forex currency.</p></div></section>
+<section id="AUD" class="currency-section"><div class="container"><h2>AUD - Australian Dollar</h2><p>The Australian Dollar (AUD) is highly influenced by commodity exports.</p></div></section>
+<section id="CAD" class="currency-section"><div class="container"><h2>CAD - Canadian Dollar</h2><p>The Canadian Dollar (CAD) is widely respected for its economic stability.</p></div></section>
+<section id="CHF" class="currency-section"><div class="container"><h2>CHF - Swiss Franc</h2><p>The Swiss Franc (CHF) is known as a “safe-haven” currency.</p></div></section>
+<section id="CNY" class="currency-section"><div class="container"><h2>CNY - Chinese Yuan</h2><p>The Chinese Yuan (CNY) reflects China’s growing influence on global trade.</p></div></section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <p class="mb-2">© 2025 Currency App | Built with ❤️ and Bootstrap</p>
+    <div>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <a href="#"><i class="fab fa-github"></i></a>
+      <a href="#"><i class="fab fa-linkedin"></i></a>
+    </div>
+  </div>
+</footer>
+
+<!-- Bootstrap + jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  // Conversion Rates
+  const exchangeRates = {
+    USD: { EUR: 0.91, GBP: 0.80, INR: 83.9, JPY: 145.5, AUD: 1.5, CAD: 1.31, CHF: 0.88, CNY: 6.83, USD: 1 },
+    EUR: { USD: 1.10, GBP: 0.88, INR: 92.3, JPY: 160.4, AUD: 1.64, CAD: 1.43, CHF: 0.97, CNY: 7.54, EUR: 1 },
+    GBP: { USD: 1.25, EUR: 1.13, INR: 105.1, JPY: 182.0, AUD: 1.86, CAD: 1.62, CHF: 1.10, CNY: 8.57, GBP: 1 },
+    INR: { USD: 0.012, EUR: 0.011, GBP: 0.0095, JPY: 1.73, AUD: 0.018, CAD: 0.015, CHF: 0.010, CNY: 0.081, INR: 1 },
+    JPY: { USD: 0.0069, EUR: 0.0062, GBP: 0.0055, INR: 0.58, AUD: 0.010, CAD: 0.0091, CHF: 0.0061, CNY: 0.047, JPY: 1 },
+    AUD: { USD: 0.67, EUR: 0.61, GBP: 0.54, INR: 56.1, JPY: 97.2, CAD: 0.87, CHF: 0.58, CNY: 4.55, AUD: 1 },
+    CAD: { USD: 0.76, EUR: 0.70, GBP: 0.62, INR: 64.5, JPY: 112.1, AUD: 1.15, CHF: 0.67, CNY: 5.23, CAD: 1 },
+    CHF: { USD: 1.14, EUR: 1.03, GBP: 0.91, INR: 96.7, JPY: 163.8, AUD: 1.72, CAD: 1.50, CNY: 7.84, CHF: 1 },
+    CNY: { USD: 0.15, EUR: 0.13, GBP: 0.12, INR: 12.3, JPY: 21.2, AUD: 0.22, CAD: 0.19, CHF: 0.13, CNY: 1 },
+  };
+
+  // Populate currency dropdowns dynamically
+  const currencies = Object.keys(exchangeRates);
+  currencies.forEach(c => {
+    $("#fromCurrency, #toCurrency").append(new Option(c, c));
+  });
+  $("#fromCurrency").val("USD");
+  $("#toCurrency").val("EUR");
+
+  // jQuery Conversion Handling
+  $(document).ready(function () {
+    $("#convertBtn").click(function () {
+      let amount = parseFloat($("#amount").val());
+      let from = $("#fromCurrency").val();
+      let to = $("#toCurrency").val();
+      let resultDiv = $("#result");
+
+      resultDiv.removeClass("text-success text-danger");
+
+      if (!amount || amount <= 0) {
+        resultDiv.text("⚠️ Please enter a valid positive amount.").addClass("text-danger");
+        return;
+      }
+      if (from === to) {
+        resultDiv.text(`Converted: ${amount.toFixed(2)} ${to}`).addClass("text-success");
+        return;
+      }
+
+      let rate = exchangeRates[from]?.[to];
+      if (!rate) {
+        resultDiv.text("❌ Conversion rate not available.").addClass("text-danger");
+        return;
+      }
+
+      let converted = amount * rate;
+      resultDiv.text(`Converted: ${converted.toFixed(2)} ${to}`).addClass("text-success");
+    });
+
+    $("#amount, #fromCurrency, #toCurrency").on("input change", function () {
+      $("#result").text("");
+    });
+  });
+</script>
+</body>
+</html>
